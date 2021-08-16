@@ -20,6 +20,8 @@ namespace NCReactPortfolioWebsite
 		public IConfiguration Configuration { get; }
 
 		// This method gets called by the runtime. Use this method to add services to the container.
+
+		//sidtodo: HMR + SSR
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddControllersWithViews();
@@ -40,13 +42,10 @@ namespace NCReactPortfolioWebsite
 
 			app.UseRouting();
 
-			app.UseAuthorization();
-
 			app.UseEndpoints(endpoints =>
 			{
-				endpoints.MapControllerRoute(
-						 name: "default",
-						 pattern: "{controller=Home}/{action=Index}/{id?}");
+				// Replaces the 'URL rewrite' functionality in IIS and is necessary for clientside navigation to work
+				endpoints.MapFallbackToController("Index", "Home");
 			});
 		}
 	}

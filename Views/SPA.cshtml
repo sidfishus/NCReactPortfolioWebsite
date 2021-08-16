@@ -1,0 +1,50 @@
+﻿
+@{/* Key for SSR to work */}
+@{ /* @addTagHelper *, Microsoft.AspNetCore.SpaServices //sidtodo uncomment when SSR is working in .NET 5 */ }
+
+@{
+    ViewData["Title"] = "Login";
+
+    dynamic prerenderData = new
+    {
+    };
+
+#if DEBUG
+    // Can't reference repository JS files due to this error:
+    // Refused to execute script from '..' because its MIME type ('text/plain') is not executable, and strict MIME
+    // type checking is enabled.
+    //TODO: can I add these files to CDN so they don't have to be hosted within Azure??
+    string jsClientFilename = "/js/main-client-debug.js";
+    string reactElementName = "reactDebug";
+    string semanticCSS = "/css/semantic.css";
+    string carouselCSS = "/css/carousel.min.css";
+    string demoCSS = "/css/demo.css";
+#else
+
+    string jsClientFilename="/js/main-client.js";
+    string reactElementName="react";
+    string semanticCSS="/css/semantic.css";
+    string carouselCSS="/css/carousel.min.css";
+    string demoCSS="/css/demo.css";
+#endif
+}
+
+<link rel="stylesheet" href="@semanticCSS" />
+<link rel="stylesheet" href="@carouselCSS" />
+<link rel="stylesheet" href="@demoCSS" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html>
+<body>
+
+    <div id="@reactElementName"></div>
+
+    @{
+        string ssrOnly = Environment.GetEnvironmentVariable("SSR_Only");
+        if (ssrOnly == null || ssrOnly == "0")
+        {
+            <script src=@jsClientFilename></script>
+        }
+    }
+
+</body>
+</html>
