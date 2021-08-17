@@ -23,9 +23,3 @@
 **/values.dev.yaml
 LICENSE
 README.md
-
-wwwroot/js/main-client.js
-wwwroot/js/main-client-debug.js
-
-Server/main-server.js
-Server/main-server-debug.js
