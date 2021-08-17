@@ -14,7 +14,7 @@ spec:
             app: website-service
       spec:
          imagePullSecrets:
-         - name: secretname
+         - name: <Secret Name>
          containers:
          - name: website-service
            image: chrissiddall.azurecr.io/ncreactportfoliowebsite:latest
