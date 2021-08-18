@@ -1,4 +1,4 @@
 
 export const CreateAPIURL = (url: string, params: string = null): string => {
-	return `/api/${url}${((params)?`?${params}`:"")}`;
+	return `https://chrissiddallapi.azure-api.net/${url}${((params)?`?${params}`:"")}`;
 };
